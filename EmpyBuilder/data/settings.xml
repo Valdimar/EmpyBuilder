@@ -1,0 +1,56 @@
+<?xml version="1.1" ?>
+<settings>
+    <global>
+        <announce>true</announce>
+        <compact>true</compact>
+        <font>Consolas</font>
+        <goal>50</goal>
+        <layout>wide</layout>
+        <minimized>false</minimized>
+        <near_rate>3</near_rate>
+        <only_in_zone>false</only_in_zone>
+        <opacity>75</opacity>
+        <red_alerts>true</red_alerts>
+        <rescan>60</rescan>
+        <show_in>farm</show_in>
+        <size>10</size>
+        <visible>true</visible>
+        <weapons />
+        <window>
+            <bg>
+                <alpha>215</alpha>
+                <blue>26</blue>
+                <green>18</green>
+                <red>14</red>
+            </bg>
+            <border>
+                <alpha>255</alpha>
+                <blue>150</blue>
+                <green>110</green>
+                <red>90</red>
+            </border>
+            <header>
+                <alpha>235</alpha>
+                <blue>56</blue>
+                <green>38</green>
+                <red>30</red>
+            </header>
+            <padding>8</padding>
+            <pos>
+                <x>400</x>
+                <y>200</y>
+            </pos>
+        </window>
+    </global>
+    <valdimar>
+        <layout>tall</layout>
+        <show_in>abyssea</show_in>
+        <weapons>Rhongomiant</weapons>
+        <window>
+            <pos>
+                <x>10</x>
+                <y>420</y>
+            </pos>
+        </window>
+    </valdimar>
+</settings>
