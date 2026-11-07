@@ -1,14 +1,32 @@
 # EmpyBuilder
 
-A Windower 4 addon for the **Level 80 stage of the Empyrean weapons**. Each Lv80 trial needs
-**50** of one Abyssea NM's drop. Pick the weapon(s) you're building and EmpyBuilder shows, in a
-display window:
+A Windower 4 addon for building the **Empyrean weapons from Lv80 to Lv119**. The Abyssea
+stages (Lv80, 85, 90) each need a pile of one NM's drop (50, 50, 75); after that come the
+material stages (Lv95, 99, 119).
+Pick the weapon(s) you're building and EmpyBuilder shows, in a display window:
 
-- how many of that NM item you have, e.g. **13 / 50** (every bag counted),
+- which stage each weapon is on, worked out from the weapon in your bags,
+- how many of that stage's NM item you have, e.g. **13 / 50** (every bag counted),
 - the NM's whole pop chain, checked live against your bags and key items,
 - `RED!!!` alerts on the key items that need a red proc.
 
+## Version
+
+**1.9.** Each update goes up by 0.1 (1.6, 1.7, ...). The zip is named to match
+(`EmpyBuilder-v1.9.zip`), and `//lua list` shows the same number in game.
+
 ## Install
+
+When it loads (and when you log in on another character), chat shows which weapons that
+character is building and at what stage, in the same style as the other addons:
+
+```
+[EmpyBuilder] Author: Valdimar @ Phoenix 1.9  -  //empy help for commands
+[EmpyBuilder] Loaded profile for Valdimar: Redemption (Lv85), Rhongomiant (Lv85).
+```
+
+`//empy about` shows it again.
+
 
 1. Copy the `EmpyBuilder` folder into `Windower4/addons/` (remove the old `ChlorisPop` folder).
 2. In game: `//lua load EmpyBuilder`.
@@ -61,28 +79,67 @@ the Lv80 NMs live in, and hides everywhere else. Your counts and key items are s
 outside (chat lines still work, and `//empy weapons` shows your counts anywhere).
 `//empy where abyssea` shows it in any Abyssea zone; `//empy where always` shows it everywhere.
 
-## Lv80 items by weapon
+## Items by weapon and stage
 
-| Weapon | Type | Lv80 item (x50) | NM | Zone |
+| Weapon | Type | Lv80 (x50) | Lv85 (x50) | Lv90 (x75) |
 | --- | --- | --- | --- | --- |
-| Verethragna | Hand-to-Hand | 2Lf. Chloris Bud | Chloris | Abyssea - Tahrongi |
-| Redemption | Scythe | 2Lf. Chloris Bud | Chloris | Abyssea - Tahrongi |
-| Rhongomiant | Polearm | 2Lf. Chloris Bud | Chloris | Abyssea - Tahrongi |
-| Twashtar | Dagger | Glavoid Shell | Glavoid | Abyssea - Tahrongi |
-| Ukonvasara | Great Axe | Glavoid Shell | Glavoid | Abyssea - Tahrongi |
-| Almace | Sword | Helm of Briareus | Briareus | Abyssea - La Theine |
-| Kannagi | Katana | Helm of Briareus | Briareus | Abyssea - La Theine |
-| Caladbolg | Great Sword | Carabosse's Gem | Carabosse | Abyssea - La Theine |
-| Masamune | Great Katana | Carabosse's Gem | Carabosse | Abyssea - La Theine |
-| Armageddon | Gun | Carabosse's Gem | Carabosse | Abyssea - La Theine |
-| Farsha | Axe | Fistule Discharge | Fistule | Abyssea - Konschtat |
-| Gambanteinn | Club | Fistule Discharge | Fistule | Abyssea - Konschtat |
-| Gandiva | Bow | Fistule Discharge | Fistule | Abyssea - Konschtat |
-| Hvergelmir | Staff | Kukulkan's Fang | Kukulkan | Abyssea - Konschtat |
+| Verethragna | Hand-to-Hand | 2Lf. Chloris Bud (Chloris) | Ulhuadshi's Fang (Ulhuadshi) | Dragua's Scale (Dragua) |
+| Redemption | Scythe | 2Lf. Chloris Bud (Chloris) | Ulhuadshi's Fang (Ulhuadshi) | Dragua's Scale (Dragua) |
+| Rhongomiant | Polearm | 2Lf. Chloris Bud (Chloris) | Ulhuadshi's Fang (Ulhuadshi) | Dragua's Scale (Dragua) |
+| Twashtar | Dagger | Glavoid Shell (Glavoid) | Itzpapalotl's Scale (Itzpapalotl) | Orthrus's Claw (Orthrus) |
+| Ukonvasara | Great Axe | Glavoid Shell (Glavoid) | Itzpapalotl's Scale (Itzpapalotl) | Orthrus's Claw (Orthrus) |
+| Almace | Sword | Helm of Briareus (Briareus) | Sobek's Skin (Sobek) | Apademak's Horn (Apademak) |
+| Kannagi | Katana | Helm of Briareus (Briareus) | Sobek's Skin (Sobek) | Apademak's Horn (Apademak) |
+| Caladbolg | Great Sword | Carabosse's Gem (Carabosse) | Cirein-croin's Lantern (Cirein-croin) | Isgebind's Heart (Isgebind) |
+| Masamune | Great Katana | Carabosse's Gem (Carabosse) | Cirein-croin's Lantern (Cirein-croin) | Isgebind's Heart (Isgebind) |
+| Armageddon | Gun | Carabosse's Gem (Carabosse) | Cirein-croin's Lantern (Cirein-croin) | Isgebind's Heart (Isgebind) |
+| Farsha | Axe | Fistule Discharge (Fistule) | Bukhis's Wing (Bukhis) | Alfard's Fang (Alfard) |
+| Gambanteinn | Club | Fistule Discharge (Fistule) | Bukhis's Wing (Bukhis) | Alfard's Fang (Alfard) |
+| Gandiva | Bow | Fistule Discharge (Fistule) | Bukhis's Wing (Bukhis) | Alfard's Fang (Alfard) |
+| Hvergelmir | Staff | Kukulkan's Fang (Kukulkan) | Sedna's Tusk (Sedna) | Azdaja's Horn (Azdaja) |
 
-Weapons that share an NM share one section in the window (e.g. Redemption and Rhongomiant both
-show under Chloris, `for Redemption, Rhongomiant`), and the count is the same item pool, so two
-weapons on the same NM need 50 each.
+Zones: Lv80 NMs are in La Theine, Konschtat and Tahrongi; Lv85 in Attohwa (Ulhuadshi,
+Itzpapalotl), Misareaux (Sobek, Cirein-croin) and Vunkerl (Sedna, Bukhis); Lv90 in Altepa
+(Dragua, Orthrus), Uleguerand (Apademak, Isgebind) and Grauberg (Alfard, Azdaja).
+
+Weapons that share an NM share one section in the window, but each weapon needs its own
+50 (or 75).
+
+## Stages: building all the way to Lv119
+
+EmpyBuilder works out each weapon's stage from the highest-level copy of it in your bags:
+none means you're working on Lv80, a Lv80 copy means Lv85, a Lv85 copy means Lv90, and Lv90
+or higher means done. When you trade up, the window moves on to the next NM by itself and
+chat says so (`Redemption is Lv80 now: next is 50 Ulhuadshi's Fang from Ulhuadshi
+(Abyssea - Attohwa)`).
+
+- `//empy stage` lists every stage of the weapons you're building, with your counts.
+- `//empy stage 85 redemption` sets a stage by hand (`80`, `85`, `90` or `done`); leave the
+  weapon off to set every weapon. `//empy stage auto` goes back to reading your bags. A stage
+  set by hand clears itself once your bags show you're past it.
+- `//empy next redemption` moves a weapon to its next stage, e.g. right after you trade.
+- `//empy full` turns on the **full build** view: besides the stage you're on, the window also
+  lists the NMs still ahead for each weapon, marked `LATER`, with just their item count. Handy
+  for picking up Lv85/Lv90 items early. `//empy full off` goes back.
+- `//empy path twashtar` prints every stage for one weapon in chat.
+
+### After Lv90
+
+| Stage | Trade | Weapons |
+| --- | --- | --- |
+| Lv95 | 1,500 Heavy Metal | all |
+| Lv99 | 60 Riftcinder | Verethragna, Almace, Farsha, Redemption, Rhongomiant, Masamune, Gandiva |
+| Lv99 | 60 Riftdross | Twashtar, Caladbolg, Ukonvasara, Kannagi, Gambanteinn, Hvergelmir, Armageddon |
+| Lv119 | 300 Riftborn Boulder | all |
+
+These stages have no NM chain, so their section shows the count, a progress bar and where the
+material comes from (Ambuscade and Voidwatch). The stage is read from your weapon the same way:
+a Lv90 copy means Lv95, Lv95 means Lv99, Lv99 means Lv119, and a Lv119 copy means done.
+The Lv95 figure is from BG Wiki; the Lv99 and Lv119 figures are from posts on the official
+forums when those upgrades came out, so check them against the Magian moogle.
+The window still only appears in Abyssea zones unless you use `//empy where always`.
+
+The window appears in all nine Abyssea zones with Empyrean NMs.
 
 ## Pop chains
 
@@ -93,7 +150,19 @@ weapons on the same NM need 50 each.
 | **Briareus** | ??? (G-6) | Dented Gigas shield (Adamastor, C-4: Trophy Shield ← Bathyal Gigas) · Warped Gigas armband (Pantagruel, F-7: Oversized Sock ← Hadal Gigas) · Severed Gigas collar (Grandgousier, F-10: Massive Armband ← Demersal Gigas) |
 | **Carabosse** | ??? (H-7) | Pellucid fly eye (La Theine Liege, I-7: Transparent Insect Wing ← Plateau Glider) · Shimmering pixie pinion (Baba Yaga, H-7: Piceous Scale ← Farfadet) |
 | **Kukulkan** | ??? (H-5) | Mucid ahriman eyeball (Arimaspi, K-6: Clouded Lens ← Deep Eye) · Tattered hippogryph wing (Alkonost, H-6: Giant Bugard Tusk ← Ypotryll) · Cracked wivre horn (Keratyrannos, G-6: Armored Dragonhorn ← Mesa Wivre) |
-| **Fistule** | Timed, (G-3), 15-20 min | No pop items. Pull Lentor, Bloodguzzler or Guimauve onto it to claim it |
+| **Fistule** | (G-3), by Conflux #6 | No pop items. Bring the NM Guimauve (G-4, #6) next to it to make it pop |
+| **Ulhuadshi** (Lv85) | ??? #3 J/K-7, Attohwa | Mucid worm segment (Pallid Percy, J-7: Blanched Silver ← Entozoon) · Shriveled hecteyes stalk (Amun, K-9, timed) |
+| **Itzpapalotl** (Lv85) | ??? #7 K-10, Attohwa | Bulbous crawler cocoon (Blazing Eruca, J-10: Eruca Egg ← Ignis Eruca) · Venomous wamoura feeler (Granite Borer, K-10: Withered Cocoon ← Gullycampa) · Distended chigoe abdomen (Tunga, K-9/10, timed) |
+| **Sobek** (Lv85) | ??? #7 J-11, Misareaux | Bloodstained bugard fang (Minax Bugard, K-10: Bewitching Tusk ← Abyssobugard) · Gnarled lizard nail (Sirrush, I-11: Molt Scraps ← Dusk Lizard) · Molted peiste skin (Gukumatz, J-11, timed) |
+| **Cirein-croin** (Lv85) | ??? #3 J/K-7, Misareaux | Glistening orobon liver (Cep-Kamuy, F-5: Orobon Cheekmeat ← Ancient Orobon) · Doffed poroggo hat (Heqet, I-6, timed) |
+| **Sedna** (Lv85) | ??? #3 K-6, Vunkerl | Glossy sea monk sucker (Iku-Turso, J-7: Moonbeam Clam ← Jasconius) · Shimmering pugil scale (Hrosshvalur, J/K-6, timed) |
+| **Bukhis** (Lv85) | ??? #4 G-10, Vunkerl | Ingrown taurus nail (Khalkotaur, H-10: Gnarled Taurus Horn ← Aestutaur) · Ossified gargouille hand (Quasimodo, G-11: Gargouille Stone ← Gruesome Gargouille) · Imbrued vampyr fang (Lord Varney, G/H-10, timed) |
+| **Dragua** (Lv90) | ??? #4 G-9, Altepa | Bloodied dragon ear (Hazhdiha, G/H-9/10, timed) |
+| **Orthrus** (Lv90) | ??? #7 F-7, Altepa | Steaming cerberus tongue (Amarok, G-5: Sharabha Hide ← Sharabha ← Sand-caked Fang ← Dune Manticore; H.Q. Dhalmel Hide ← Camelopardalis; Tiger King Hide ← Ansherekh, timed) |
+| **Apademak** (Lv90) | ??? #7 F-6, Uleguerand | Torn khimaira wing (Dhorme Khimaira, G-7: Snow God Core ← Upas-Kamuy ← Gelid Arm ← Snowflake; Sisyphus Fragment ← Sisyphus, free spawn among Verglas Golems; H.Q. Marid Hide ← Olyphant) |
+| **Isgebind** (Lv90) | ??? #6 I-5, Uleguerand | Begrimed dragon hide (Kur, I/J-5, free spawn among Adasaurus) |
+| **Alfard** (Lv90) | ??? #8 J-8, Grauberg | Venomous hydra fang (Ningishzida, I-7/8: Minaruja Skull ← Minaruja ← Pursuer's Wing ← Faunus Wyvern; Jaculus Wing ← Jaculus, timed; H.Q. Wivre Hide ← Glade Wivre) |
+| **Azdaja** (Lv90) | ??? #7 C-8, Grauberg | Vacant bugard eye (Deelgeed, F-9, timed) |
 
 ## The window
 
@@ -107,14 +176,14 @@ CHLORIS  Abyssea - Tahrongi  ??? #2* I-8   2Lf. Chloris Bud 13 / 50 (9 in inv)
   Get the key items, then examine the ??? at (I-8)  1/4 KI
   [x] Torn bat wing  owned, ready for Chloris
   Gory scorpion claw  key item for Chloris   2/4 steps
-    1 [x] Kill Pachypodium     ~#2* H-8     > Alkaline Humus             HAVE     -> Gancanagh
+    1 [x] Kill Pachypodium     #7 H/I-8     > Alkaline Humus             HAVE     -> Gancanagh
    >> [ ] Pop Gancanagh        #2* H-8      > Acidic Humus               POP IT   -> Hedetet
     3 [x] Kill Canyon Scorpion #4 F-7       > Venomous Scorpion Stinger  HAVE     -> Hedetet
     4 [ ] Pop Hedetet          #4 F-7       > Gory scorpion claw (KI)    NEED     -> Chloris   RED!!!
   Veinous hecteyes eyelid  key item for Chloris   0/6 steps
-   >> [ ] Kill Gully Clionid   ~#1 G-12     > High-Quality Clionid Wing  FARM     -> Halimede
+   >> [ ] Kill Gully Clionid   #1 I-12      > High-Quality Clionid Wing  FARM     -> Halimede
     2 [ ] Pop Halimede         #1 G-12      > Shriveled Wing             NEED     -> Ophanim
-    3 [ ] Kill Gulch Limule    ~#1 H-10     > High-Quality Limule Pincer FARM     -> Vetehinen
+    3 [ ] Kill Gulch Limule    #1 H-11      > High-Quality Limule Pincer FARM     -> Vetehinen
     4 [ ] Pop Vetehinen        #1 H-10      > Tarnished Pincer           NEED     -> Ophanim
     5 [ ] Kill Beholder        #2* G-9      > Bloodshot Hecteye          FARM     -> Ophanim
     6 [ ] Pop Ophanim          #2* G-9      > Veinous hecteyes eyelid (KI) NEED   -> Chloris   RED!!!
@@ -122,8 +191,8 @@ CHLORIS  Abyssea - Tahrongi  ??? #2* I-8   2Lf. Chloris Bud 13 / 50 (9 in inv)
 
 FISTULE  Abyssea - Konschtat  spawn #6 G-3   Vial of Fistule Discharge 0 / 50
   for Gandiva
-  Timed spawn at (G-3) by Conflux #6, every 15-20 min. No pop items.
-  To claim it, pull Lentor (F-6, #5), Bloodguzzler (G-5, #6) or Guimauve (G-4, #6) onto it.
+  Pops when you bring the NM Guimauve next to it, at (G-3) by Conflux #6.
+  Find Guimauve (G-4, #6), claim it and pull it to Fistule at (G-3).
 
 Searched bags + key items 17:52:10 (12s ago)  -  //empy refresh
 ```
@@ -155,7 +224,7 @@ KEY ITEMS                                1/4
 [ ] Mossy adamantoise shell [-]       0/1 RED!!!
 
 Gory scorpion claw                     steps
-  [x] Pachypodium      ~#2* H-8  HAVE
+  [x] Pachypodium      #7 H/I-8  HAVE
   >>  Gancanagh        #2* H-8   POP IT
   [x] Canyon Scorpion  #4 F-7    HAVE
   [ ] Hedetet          #4 F-7    NEED     RED!!!
@@ -194,10 +263,9 @@ item from one step feeds straight into the next NM, ending with the key item `->
 
 **Where to go.** Every step has a *where* column with the nearest Veridical Conflux and the
 map square, e.g. `#4 F-7` (Conflux #4, square F-7). For an NM that's where its pop ??? is. Each
-NM's header shows the same for the big NM's ??? (`??? #2 I-8`). Where the wiki lists no spot
-for a regular mob (Caoineag, Pachypodium, Gully Clionid, Gulch Limule, Canyon Eft,
-Jaguarundi), the column shows where the NM its item pops is, marked `~` (`~#1 G-12`), since
-they're farmed around there and that's where you'll take the item.
+NM's header shows the same for the big NM's ??? (`??? #2 I-8`). Where no spot is known for a
+regular mob (a few in Uleguerand), the column shows where the NM its item pops is, marked `~`
+(`~#7 G-5`), since that's where you'll take the item.
 
 **Where you are.** While you're in La Theine, Konschtat or Tahrongi, the top of the window
 says which Veridical Conflux you're nearest and how far it is (`You are nearest Conflux #2
@@ -218,8 +286,8 @@ Akaden (BSD licence).
 | La Theine | #1 | Adamastor, Bathyal Gigas |
 | La Theine | #2 | Pantagruel, Hadal Gigas, Grandgousier, Demersal Gigas |
 | La Theine | #4 | Briareus, Carabosse, La Theine Liege, Plateau Glider, Baba Yaga, Farfadet |
-| Konschtat | #5 | Alkonost, Ypotryll, Keratyrannos, Mesa Wivre, Lentor |
-| Konschtat | #6 | Fistule, Bloodguzzler, Guimauve |
+| Konschtat | #5 | Alkonost, Ypotryll, Keratyrannos, Mesa Wivre |
+| Konschtat | #6 | Fistule, Guimauve |
 | Konschtat | #7 | Arimaspi, Deep Eye |
 | Konschtat | #8 | Kukulkan |
 
@@ -250,6 +318,52 @@ skill that matches the NM's weakness) guarantees the pop key item to whoever cla
 Every key item in these chains comes from an NM, so each carries `RED!!!` until you own it.
 When you **target** that NM, the tag flashes and reads `RED!!! proc it`. Ordinary pop items
 (fangs, shields, scales...) need no red proc. `//empy red off` turns the alerts off.
+
+## Abyssea time
+
+The header shows how long your visitant status has left (`time 47m`): green, then yellow at
+10 minutes and red at 5, with an alert at each. The game prints *Your visitant status will
+wear off in 25 minutes.* now and then; each of those lines sets the clock, and it counts down
+in between, so it appears after the first such line of a visit. `//empy time 45` sets it by
+hand, `//empy time` says it in chat, `//empy time clear` hides it. It clears when you leave
+Abyssea.
+
+## Lights window
+
+The lights window is **off by default**. `//empy lights` turns it on (it only appears while you're in Abyssea), and `//empy lights off` turns it off again. It
+tallies the lights you gain this visit, from lines like *Valdimar's body emits a strong golden
+light!*: how many faint, mild and strong for each colour. When a Conflux Surveyor reports your
+exact lights (*Visitant Light Intensity Pearlescent: 120 / ...*), it shows those numbers and
+counts the gains since. Golden light raises the chance of gold chests, and the window lists
+which of your still-needed pop items and key items a gold chest in this zone can give:
+any of them in the first six zones, and the specific key items the maps list in Uleguerand,
+Altepa and Grauberg. Drag it anywhere; the spot is saved. Lights reset when you leave Abyssea.
+
+## Marks: how far and which way
+
+Stand at a ??? and type `//empy mark`. It saves that spot for the NM the NEXT step is about
+(or name it: `//empy mark gancanagh`; any NM or mob in your chains in this zone works). From
+then on that step shows the distance and direction from where you are, e.g. `140y NE`, in
+both layouts, and the NEXT box says `??? is 140y NE`. When you're near an unmarked ???, the
+NEXT box reminds you to mark it. `//empy mark list` lists your marks, `//empy mark clear
+<name>` removes one. Marks are shared by all your characters (`data/marks.xml`).
+
+## Alerts
+
+A sound and a big line of text at the top of the screen for:
+
+| Alert | When | Sound |
+| --- | --- | --- |
+| `respawn` | a timed NM's respawn window opens | chime |
+| `weakness` | the log names your target's weakness (with the weapon skill to use) | chime |
+| `redproc` | a red proc lands | success |
+| `goal` | you reach 50 / 75 of an item | success |
+| `time` | 10 and 5 minutes of Abyssea time left | alert |
+
+`//empy alert` lists them, `//empy alert respawn off` turns one off, `//empy alert test` plays
+one. `//empy sound off` keeps the text but drops the sound; `//empy flash off` keeps the sound
+but drops the text. The sounds are in the addon's `sounds` folder; swap in your own `.wav`
+files with the same names if you like.
 
 ## Respawn timers
 
@@ -316,6 +430,10 @@ every **60 seconds** (`//empy every <seconds>`, `0` = changes only), plus `//emp
 | Command | Does |
 | --- | --- |
 | `pick` | Open the weapon picker window |
+| `stage [80..119\|done\|auto] [weapon]` | Show every stage of your weapons, or set one by hand (`auto`: from your bags) |
+| `next [weapon]` | Move a weapon (or all of them) to its next stage |
+| `full [on\|off]` | Also show the NMs for each weapon's later stages, marked `LATER` |
+| `path <weapon>` | Every stage for one weapon in chat |
 | `weapon <name or type>` | Add a weapon you're building: `weapon Rhongomiant`, `weapon polearm` |
 | `add <name or type>` / `remove <name or type>` | Same as `weapon` / take one off the list |
 | `<name or type>` | Shortcut for `add`: `//empy scythe` |
@@ -328,23 +446,35 @@ every **60 seconds** (`//empy every <seconds>`, `0` = changes only), plus `//emp
 | `zone [on\|off]` | Inside those zones, only show NMs for the zone you're in |
 | `announce [on\|off]` | Chat lines for new key items, count increases and reaching 50 |
 | `every <seconds>` | Timed search (default 60; `0` = changes only) |
-| `goal <n>` | Items per trial (default 50) |
+| `goal <n>` | Use this many items for every stage; `goal 0` goes back to 50 / 50 / 75 |
 | `near [on\|off\|<seconds>]` | Nearest conflux: on / off / how often it's checked (default 3 s); alone, says it in chat |
-| `killed <nm> [min ago]` | Start a respawn timer for Chukwa, Adze, Minhocao or Fistule; `killed clear` clears them |
+| `killed <nm> [min ago]` | Start a respawn timer for a timed NM (Chukwa, Tunga, Hazhdiha...); `killed clear` clears them |
+| `lights [on\|off]` | Turn the lights window on / off (off by default) |
+| `time [minutes\|clear]` | Abyssea time: say it, set it, or clear it |
+| `mark [name]` / `mark list` / `mark clear <name>` | Save a ??? spot for distance and direction |
+| `alert [kind on\|off]` / `alert test` | Turn alerts on or off, or test one |
+| `sound on\|off` / `flash on\|off` | Alert sounds / on-screen alert text |
 | `layout wide\|tall` | Wide window with every step (default), or the narrow next-step window |
 | `opacity <10-100>` | How see-through the window is, panel and text together (default **75**) |
 | `size <n>` / `pos <x> <y>` | Text size / window position |
 | `list` | Your NMs' chains and status in chat |
 | `refresh` | Search bags and key items now |
+| `about` | Show the loading lines again: profile, weapons and stages, version |
+| `reload` | Reload the addon (same as `//lua reload EmpyBuilder`), e.g. after copying in a new version |
 
 Display settings and window colours are in `addons/EmpyBuilder/data/settings.xml`; each
 character's weapon list is in `addons/EmpyBuilder/data/<CharacterName>.xml`.
 
 ## Notes
 
+- Every chain is checked against Arciel Spira's Abyssea zone maps (wilddragonchase.com) as well
+  as BG Wiki. The maps also gave Uleguerand's conflux numbers, the spots of the Tahrongi
+  regular mobs, Fistule's real trigger (Guimauve), and the NMs that spawn among regular mobs:
+  Sisyphus (Verglas Golems), Kur (Adasaurus), Jaculus (Putrid Peapuk), Deelgeed (Deimobugard)
+  and Ansherekh (Manigordo).
+- Timed Lv85/Lv90 NMs (Tunga, Amun, Gukumatz, Heqet, Hrosshvalur, Lord Varney, Hazhdiha,
+  Ansherekh, Jaculus, Deelgeed) get the same 10-15 minute respawn timers as Chukwa.
+
 - Items and key items are matched by name against Windower's resources (short and long
   names), so no IDs are hard-coded. Any name that isn't found is listed in chat on load.
-- A few lowest-tier sources are the commonly cited ones but not confirmed on the wiki:
-  Baleful Skull (Caoineag), Alkaline Humus (Pachypodium), Quivering Eft Egg (Abas) and
-  Smooth Whisker (Tefenet). A wrong source only changes the label, not the checking.
 - The addon can't see an NM's weakness; use your Abyssite of Discernment for the element.
