@@ -37,7 +37,7 @@ and the commands are split into three parts.
 -- Addon details Windower shows in //lua list, and the chat commands it answers to
 _addon.name     = 'EmpyBuilder'
 _addon.author   = 'Valdimar @ Phoenix'
-_addon.version  = '3.1'
+_addon.version  = '3.2'
 _addon.commands = {'empy', 'empybuilder'}
 
 -- Says in chat when a newer version is on GitHub (once per load; see update_check.lua)

@@ -12,8 +12,8 @@ Pick the weapon(s) you're building and EmpyBuilder shows, in a display window:
 
 ## Version
 
-**3.1.** Each update goes up by 0.1 (1.6, 1.7, ...). The zip is named to match
-(`EmpyBuilder-v3.1.zip`), and `//lua list` shows the same number in game.
+**3.2.** Each update goes up by 0.1 (1.6, 1.7, ...). The zip is named to match
+(`EmpyBuilder-v3.2.zip`), and `//lua list` shows the same number in game.
 
 ## Install
 
@@ -21,7 +21,7 @@ When it loads (and when you log in on another character), chat shows which weapo
 character is building and at what stage, in the same style as the other addons:
 
 ```
-[EmpyBuilder] Author: Valdimar @ Phoenix 3.1  -  //empy help for commands
+[EmpyBuilder] Author: Valdimar @ Phoenix 3.2  -  //empy help for commands
 [EmpyBuilder] Loaded profile for Valdimar: Redemption (Lv85), Rhongomiant (Lv85).
 ```
 
@@ -37,15 +37,19 @@ character is building and at what stage, in the same style as the other addons:
 
 ## Update check
 
-A few seconds after you log in, EmpyBuilder checks GitHub once for a newer version. If there is one,
-chat says so:
+A few seconds after you log in, EmpyBuilder checks GitHub once and always says in chat how it
+went:
 
-```
-[EmpyBuilder] Version X.Y is out (you have 3.1). Get it from github.com/Valdimar/EmpyBuilder
-```
+- **Up to date:** `[EmpyBuilder] Up to date (version 3.2).`
+- **Update available**, in a different colour so it stands out:
+  `[EmpyBuilder] UPDATE AVAILABLE: version X.Y is out (you have 3.2). Get it from github.com/Valdimar/EmpyBuilder`
+- **Newer than GitHub** (an update that hasn't been released yet):
+  `[EmpyBuilder] Version 3.2 is newer than GitHub (3.1), so it hasn't been released yet.`
+- **Couldn't check** (no HTTPS support, or GitHub didn't answer):
+  `[EmpyBuilder] Couldn't check for updates (GitHub didn't answer). Try again with a reload.`
 
-It only speaks up when GitHub has a newer version, and stays quiet if GitHub can't be reached.
-The game can pause for a moment while it checks (at most 3 seconds, usually much less).
+The game can pause for a moment while it checks (at most 3 seconds, usually much less). Reload
+the addon to check again.
 
 ## Picking your weapon
 
