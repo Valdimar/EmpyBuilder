@@ -37,7 +37,7 @@ and the commands are split into three parts.
 -- Addon details Windower shows in //lua list, and the chat commands it answers to
 _addon.name     = 'EmpyBuilder'
 _addon.author   = 'Valdimar @ Phoenix'
-_addon.version  = '3.2'
+_addon.version  = '3.3'
 _addon.commands = {'empy', 'empybuilder'}
 
 -- Says in chat when a newer version is on GitHub (once per load; see update_check.lua)
@@ -530,6 +530,22 @@ local WEAPONS = {
 local function lc(s) return s and s:lower() or '' end
 -- A chat line in the addon's colour (207) with the [EmpyBuilder] prefix
 local function say(s) windower.add_to_chat(207, '[EmpyBuilder] ' .. s) end
+
+-- //empy debug: notes on kills and item counts, to find out why something wasn't
+-- (or was wrongly) counted. Every note goes to data/debug.log; only the ones that
+-- matter (kills of NMs being tracked, count changes) also show in chat, unless
+-- //empy debug all asks for everything in chat. Not saved between loads.
+local dbg = {on = false, all = false}
+-- note: the text; important: also show it in chat
+local function dbg_say(note, important)
+    if not dbg.on then return end
+    if important or dbg.all then windower.add_to_chat(8, '[EmpyBuilder debug] ' .. note) end
+    local f = io.open(windower.addon_path .. 'data/debug.log', 'a')
+    if f then
+        f:write(os.date('%Y-%m-%d %H:%M:%S  ') .. note .. '\n')
+        f:close()
+    end
+end
 
 -- Other names people use for the weapon types
 local TYPE_ALIASES = {
@@ -2297,6 +2313,7 @@ end
 -------------------------------------------------------------------------------
 -- Refresh: search, evaluate, announce, draw
 -------------------------------------------------------------------------------
+local scan_prev = {}   -- each NM's count at the last search (NM key -> count)
 local before   -- what the last search found {kis = owned key items, counts = item counts}, for announcements
 
 -- The Abyssea zones the Empyrean NMs live in (Lv80, 85 and 90)
@@ -2348,10 +2365,37 @@ local function refresh()
     last_scan = os.time()
     for _, key in ipairs(NM_ORDER) do
         local nm = NMS[key]
-        local was = nm.count
         evaluate(nm, have, kis)
         count_drop(nm, have)
-        if was and nm.count > was then record_drop(nm, nm.count - was) end
+    end
+
+    -- A count that changed since the last search isn't trusted yet: while items
+    -- move between bags, the game can briefly show one in both (a "ghost" 43 that's
+    -- really 42). Search again in a second, and only announce, log drops and share
+    -- counts once two searches in a row agree.
+    local stable = true
+    for _, key in ipairs(NM_ORDER) do
+        local nm = NMS[key]
+        if scan_prev[key] ~= nm.count then
+            if scan_prev[key] then
+                dbg_say(('%s %d -> %d (%d in inventory), checking again'):format(nm.drop[1], scan_prev[key],
+                    nm.count, nm.count_inv or 0), true)
+            end
+            stable = false
+        end
+        scan_prev[key] = nm.count
+    end
+    if not stable and before then
+        dirty = os.clock()
+        return
+    end
+    -- Drops for the kill log: what went up since the last confirmed search
+    if before then
+        for _, key in ipairs(NM_ORDER) do
+            local nm = NMS[key]
+            local was = before.counts[key]
+            if was and nm.count > was then record_drop(nm, nm.count - was) end
+        end
     end
     share_counts()
 
@@ -2425,12 +2469,13 @@ end
 -------------------------------------------------------------------------------
 -- Frame loop
 -------------------------------------------------------------------------------
--- dirty: something changed, search again soon; last: when the last search ran
+-- dirty: os.clock() of the last change (search once things have been quiet for a
+-- second, so a burst of item moves is read once, settled), or false; last: when the last search ran
 -- (os.clock); last_flash: the RED!!! blink; last_tick: the once-a-second redraw;
 -- last_try: when the last timed search ran (os.time)
-local dirty, last, last_flash, last_tick, last_try = true, 0, 0, 0, 0
--- Ask for a fresh search on the next frame (items or key items changed)
-local function mark() dirty = true end
+local dirty, last, last_flash, last_tick, last_try = 0, 0, 0, 0, 0
+-- Ask for a fresh search soon (items or key items changed)
+local function mark() dirty = os.clock() end
 
 -- Note what you're targeting, and whether it's an NM you still need a red proc on
 local function update_target()
@@ -2485,7 +2530,7 @@ windower.register_event('prerender', function()
         if shown then render() end
     end
 
-    if (dirty and now - last > 0.3) or (settings.rescan > 0 and wall - last_try >= settings.rescan) then
+    if (dirty and now - dirty >= 1 and now - last > 0.3) or (settings.rescan > 0 and wall - last_try >= settings.rescan) then
         dirty, last, last_try = false, now, wall
         refresh()
     elseif shown and wall ~= last_tick then
@@ -2518,11 +2563,6 @@ for _, key in ipairs(NM_ORDER) do
     for _, k in ipairs(nm.kids) do walk(k) end
 end
 
--- //empy debug: when on, every defeat the addon sees (and what it did with it) is
--- echoed in chat, to find out why a kill wasn't counted. Not saved.
-local dbg = {on = false}
-local function dbg_say(s) if dbg.on then windower.add_to_chat(8, '[EmpyBuilder debug] ' .. s) end end
-
 -- Something died: start a timed NM's respawn timer, and count stage NM kills.
 -- Both the game's defeat event and the chat line can report the same kill, so
 -- a repeat within 30 seconds is ignored.
@@ -2544,15 +2584,15 @@ local function on_defeat(raw, how)
     local name = DEFEAT_NAMES[low]
     if not name then return false end
     if defeat_seen[name] and os.time() - defeat_seen[name] <= 30 then
-        dbg_say(name .. ' (' .. how .. '): already counted')
+        dbg_say(name .. ' (' .. how .. '): already counted', true)
         return true
     end
     defeat_seen[name] = os.time()
-    dbg_say(name .. ' defeated (' .. how .. ')')
+    dbg_say(name .. ' defeated (' .. how .. ')', true)
     -- Each part is protected, so a problem in one can't stop the others
     if STAGE_NM_NAMES[name] then
         local ok, err = pcall(record_kill, name)
-        if not ok then dbg_say('kill log error: ' .. tostring(err)) end
+        if not ok then dbg_say('kill log error: ' .. tostring(err), true) end
     end
     local t = TIMED[low]
     if t then
@@ -2564,7 +2604,7 @@ local function on_defeat(raw, how)
     end
     if shown then
         local ok, err = pcall(render)
-        if not ok then dbg_say('redraw error: ' .. tostring(err)) end
+        if not ok then dbg_say('redraw error: ' .. tostring(err), true) end
     end
     return true
 end
@@ -3751,7 +3791,7 @@ help.TOPICS = {
         {'every <seconds>', 'how often to search (default 60, 0 = only on changes)'},
         {'goal <n>', 'items needed for every stage (0 = the real amounts)'},
         {'about | reload', 'the loading lines again / reload the addon'},
-        {'debug [on|off]', 'show every defeat seen in chat (to check kills are caught)'},
+        {'debug [on|off|all]', 'notes on kills and counts (all: everything in chat)'},
     }},
 }
 
@@ -4083,8 +4123,20 @@ cmd_parts[2] = function(cmd, args, rest)
         return
     -- //empy debug [on|off]: echo every defeat seen, to check kills are being caught
     elseif cmd == 'debug' then
-        dbg.on = onoff(args[1], dbg.on)
-        say('debug ' .. (dbg.on and 'on: defeats seen will show in chat (//empy debug off to stop)' or 'off'))
+        -- debug: on / off / all (everything in chat, not just what matters)
+        local a1 = lc(args[1])
+        if a1 == 'all' then
+            dbg.on, dbg.all = true, true
+        else
+            dbg.on, dbg.all = onoff(args[1], dbg.on), false
+        end
+        if not dbg.on then
+            say('debug off')
+        elseif dbg.all then
+            say('debug on: everything in chat and in data/debug.log (//empy debug off to stop)')
+        else
+            say('debug on: kills of tracked NMs and count changes in chat, the rest in data/debug.log')
+        end
         return
     -- //empy reload: reload the addon
     elseif cmd == 'reload' then

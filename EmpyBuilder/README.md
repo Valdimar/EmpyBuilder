@@ -12,8 +12,8 @@ Pick the weapon(s) you're building and EmpyBuilder shows, in a display window:
 
 ## Version
 
-**3.2.** Each update goes up by 0.1 (1.6, 1.7, ...). The zip is named to match
-(`EmpyBuilder-v3.2.zip`), and `//lua list` shows the same number in game.
+**3.3.** Each update goes up by 0.1 (1.6, 1.7, ...). The zip is named to match
+(`EmpyBuilder-v3.3.zip`), and `//lua list` shows the same number in game.
 
 ## Install
 
@@ -21,7 +21,7 @@ When it loads (and when you log in on another character), chat shows which weapo
 character is building and at what stage, in the same style as the other addons:
 
 ```
-[EmpyBuilder] Author: Valdimar @ Phoenix 3.2  -  //empy help for commands
+[EmpyBuilder] Author: Valdimar @ Phoenix 3.3  -  //empy help for commands
 [EmpyBuilder] Loaded profile for Valdimar: Redemption (Lv85), Rhongomiant (Lv85).
 ```
 
@@ -40,11 +40,11 @@ character is building and at what stage, in the same style as the other addons:
 A few seconds after you log in, EmpyBuilder checks GitHub once and always says in chat how it
 went:
 
-- **Up to date:** `[EmpyBuilder] Up to date (version 3.2).`
+- **Up to date:** `[EmpyBuilder] Up to date (version 3.3).`
 - **Update available**, in a different colour so it stands out:
-  `[EmpyBuilder] UPDATE AVAILABLE: version X.Y is out (you have 3.2). Get it from github.com/Valdimar/EmpyBuilder`
+  `[EmpyBuilder] UPDATE AVAILABLE: version X.Y is out (you have 3.3). Get it from github.com/Valdimar/EmpyBuilder`
 - **Newer than GitHub** (an update that hasn't been released yet):
-  `[EmpyBuilder] Version 3.2 is newer than GitHub (3.1), so it hasn't been released yet.`
+  `[EmpyBuilder] Version 3.3 is newer than GitHub (3.2), so it hasn't been released yet.`
 - **Couldn't check** (no HTTPS support, or GitHub didn't answer):
   `[EmpyBuilder] Couldn't check for updates (GitHub didn't answer). Try again with a reload.`
 
@@ -323,7 +323,9 @@ border and the text all fade together, and the weapon picker follows the same se
 `//empy opacity 100` makes it solid; `//empy opacity 50` fades it further (10 is the lowest).
 The setting is saved.
 
-**Item count** (`13 / 50`): every bag is counted; `(9 in inv)` appears when some are elsewhere.
+**Item count** (`13 / 50`): every bag is counted; `(9 in inv)` appears when some are elsewhere. A
+count is only announced (and counted as a drop for the kill log) once two searches a second
+apart agree, so an item caught mid-move between bags can't show up as a "ghost" extra.
 Yellow while you're collecting, green at 50. Chat says when the count goes up and when you
 reach 50.
 
@@ -608,7 +610,7 @@ mistyped command suggests the ones it might be (`//empy tim` → `timer, time`).
 | `goal <n>` | Items needed for every stage; `goal 0` goes back to the real amounts |
 | `about` | Show the loading lines again |
 | `reload` | Reload the addon (same as `//lua reload EmpyBuilder`) |
-| `debug [on\|off]` | Show every defeat the addon sees in chat, and what it did with it (to check kills are caught) |
+| `debug [on\|off\|all]` | Notes on kills and item counts. Chat shows only what matters (kills of NMs being tracked, count changes); everything goes to `data/debug.log`. `debug all` puts everything in chat too |
 
 Older names still work: `weapon` (= `add`), `clear` (= `remove all`), `path` (= `stage`),
 `list` (= `chain`), `killed` (= `timer`).
