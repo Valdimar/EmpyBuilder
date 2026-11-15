@@ -12,8 +12,8 @@ Pick the weapon(s) you're building and EmpyBuilder shows, in a display window:
 
 ## Version
 
-**3.0.** Each update goes up by 0.1 (1.6, 1.7, ...). The zip is named to match
-(`EmpyBuilder-v3.0.zip`), and `//lua list` shows the same number in game.
+**3.1.** Each update goes up by 0.1 (1.6, 1.7, ...). The zip is named to match
+(`EmpyBuilder-v3.1.zip`), and `//lua list` shows the same number in game.
 
 ## Install
 
@@ -21,7 +21,7 @@ When it loads (and when you log in on another character), chat shows which weapo
 character is building and at what stage, in the same style as the other addons:
 
 ```
-[EmpyBuilder] Author: Valdimar @ Phoenix 3.0  -  //empy help for commands
+[EmpyBuilder] Author: Valdimar @ Phoenix 3.1  -  //empy help for commands
 [EmpyBuilder] Loaded profile for Valdimar: Redemption (Lv85), Rhongomiant (Lv85).
 ```
 
@@ -34,6 +34,18 @@ character is building and at what stage, in the same style as the other addons:
    **Save**. That choice is saved for that character.
 4. Drag the tracker window by its header or body; the position is saved. Click the header to
    minimize.
+
+## Update check
+
+A few seconds after you log in, EmpyBuilder checks GitHub once for a newer version. If there is one,
+chat says so:
+
+```
+[EmpyBuilder] Version X.Y is out (you have 3.1). Get it from github.com/Valdimar/EmpyBuilder
+```
+
+It only speaks up when GitHub has a newer version, and stays quiet if GitHub can't be reached.
+The game can pause for a moment while it checks (at most 3 seconds, usually much less).
 
 ## Picking your weapon
 
