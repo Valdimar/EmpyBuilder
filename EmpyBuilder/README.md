@@ -12,8 +12,8 @@ Pick the weapon(s) you're building and EmpyBuilder shows, in a display window:
 
 ## Version
 
-**3.3.** Each update goes up by 0.1 (1.6, 1.7, ...). The zip is named to match
-(`EmpyBuilder-v3.3.zip`), and `//lua list` shows the same number in game.
+**3.4.** Each update goes up by 0.1 (1.6, 1.7, ...). The zip is named to match
+(`EmpyBuilder-v3.4.zip`), and `//lua list` shows the same number in game.
 
 ## Install
 
@@ -21,7 +21,7 @@ When it loads (and when you log in on another character), chat shows which weapo
 character is building and at what stage, in the same style as the other addons:
 
 ```
-[EmpyBuilder] Author: Valdimar @ Phoenix 3.3  -  //empy help for commands
+[EmpyBuilder] Author: Valdimar @ Phoenix 3.4  -  //empy help for commands
 [EmpyBuilder] Loaded profile for Valdimar: Redemption (Lv85), Rhongomiant (Lv85).
 ```
 
@@ -40,11 +40,11 @@ character is building and at what stage, in the same style as the other addons:
 A few seconds after you log in, EmpyBuilder checks GitHub once and always says in chat how it
 went:
 
-- **Up to date:** `[EmpyBuilder] Up to date (version 3.3).`
+- **Up to date:** `[EmpyBuilder] Up to date (version 3.4).`
 - **Update available**, in a different colour so it stands out:
-  `[EmpyBuilder] UPDATE AVAILABLE: version X.Y is out (you have 3.3). Get it from github.com/Valdimar/EmpyBuilder`
+  `[EmpyBuilder] UPDATE AVAILABLE: version X.Y is out (you have 3.4). Get it from github.com/Valdimar/EmpyBuilder`
 - **Newer than GitHub** (an update that hasn't been released yet):
-  `[EmpyBuilder] Version 3.3 is newer than GitHub (3.2), so it hasn't been released yet.`
+  `[EmpyBuilder] Version 3.4 is newer than GitHub (3.3), so it hasn't been released yet.`
 - **Couldn't check** (no HTTPS support, or GitHub didn't answer):
   `[EmpyBuilder] Couldn't check for updates (GitHub didn't answer). Try again with a reload.`
 

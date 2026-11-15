@@ -37,7 +37,7 @@ and the commands are split into three parts.
 -- Addon details Windower shows in //lua list, and the chat commands it answers to
 _addon.name     = 'EmpyBuilder'
 _addon.author   = 'Valdimar @ Phoenix'
-_addon.version  = '3.3'
+_addon.version  = '3.4'
 _addon.commands = {'empy', 'empybuilder'}
 
 -- Says in chat when a newer version is on GitHub (once per load; see update_check.lua)
@@ -2627,6 +2627,9 @@ end)
 windower.register_event('incoming text', function(original)
     if not original then return end
     local text = lc(original:gsub('[\30\31]%Z', ''):gsub('[\127\239].', ''))
+    -- Skip EmpyBuilder's own lines: a debug note that mentions a defeat would
+    -- otherwise be read back as a new chat line and echoed again, over and over
+    if text:find('[empybuilder', 1, true) then return end
     if not (text:find('defeat', 1, true) or text:find('falls to the ground', 1, true)) then return end
     dbg_say('chat: ' .. text)
     local hit = false
