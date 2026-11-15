@@ -1,7 +1,8 @@
 # EmpyBuilder
 
-A Windower 4 addon for the **Abyssea stages of the Empyrean weapons: Lv80, Lv85 and Lv90**.
-Each stage's trial needs a pile of one Abyssea NM's drop (50 for Lv80 and Lv85, 75 for Lv90).
+A Windower 4 addon for building the **Empyrean weapons from Lv80 to Lv119**. The Abyssea
+stages (Lv80, 85, 90) each need a pile of one NM's drop (50, 50, 75); after that come the
+material stages (Lv95, 99, 119).
 Pick the weapon(s) you're building and EmpyBuilder shows, in a display window:
 
 - which stage each weapon is on, worked out from the weapon in your bags,
@@ -9,7 +10,23 @@ Pick the weapon(s) you're building and EmpyBuilder shows, in a display window:
 - the NM's whole pop chain, checked live against your bags and key items,
 - `RED!!!` alerts on the key items that need a red proc.
 
+## Version
+
+**3.0.** Each update goes up by 0.1 (1.6, 1.7, ...). The zip is named to match
+(`EmpyBuilder-v3.0.zip`), and `//lua list` shows the same number in game.
+
 ## Install
+
+When it loads (and when you log in on another character), chat shows which weapons that
+character is building and at what stage, in the same style as the other addons:
+
+```
+[EmpyBuilder] Author: Valdimar @ Phoenix 3.0  -  //empy help for commands
+[EmpyBuilder] Loaded profile for Valdimar: Redemption (Lv85), Rhongomiant (Lv85).
+```
+
+`//empy about` shows it again.
+
 
 1. Copy the `EmpyBuilder` folder into `Windower4/addons/` (remove the old `ChlorisPop` folder).
 2. In game: `//lua load EmpyBuilder`.
@@ -42,14 +59,14 @@ Click to pick one or more, then Save (saved for Valdimar).
 - **Not now** closes it; it asks again the next time you log in or load the addon.
 - `//empy pick` opens it again any time to change your weapons.
 
-You can also name a weapon in chat: `//empy weapon Rhongomiant` or `//empy weapon polearm`.
+You can also name a weapon in chat: `//empy add Rhongomiant` or `//empy add polearm`.
 Weapons are matched by:
 
-- **Name**, or its first letters (`//empy weapon redem`).
+- **Name**, or its first letters (`//empy add redem`).
 - **Type**: `hand-to-hand` / `h2h`, `dagger`, `sword`, `great sword` / `gs`, `axe`,
   `great axe` / `ga`, `scythe`, `polearm` / `lance` / `spear`, `katana`, `great katana` / `gk`,
   `club`, `staff`, `bow`, `gun`. Each type is one Empyrean weapon.
-- **Close spellings**: `//empy weapon Rhongomaint` says *taking "Rhongomaint" as Rhongomiant*.
+- **Close spellings**: `//empy add Rhongomaint` says *taking "Rhongomaint" as Rhongomiant*.
 
 If a word fits more than one (`great`), chat lists the choices instead of guessing.
 
@@ -88,7 +105,7 @@ Itzpapalotl), Misareaux (Sobek, Cirein-croin) and Vunkerl (Sedna, Bukhis); Lv90 
 Weapons that share an NM share one section in the window, but each weapon needs its own
 50 (or 75).
 
-## Stages: building all the way to Lv90
+## Stages: building all the way to Lv119
 
 EmpyBuilder works out each weapon's stage from the highest-level copy of it in your bags:
 none means you're working on Lv80, a Lv80 copy means Lv85, a Lv85 copy means Lv90, and Lv90
@@ -104,7 +121,34 @@ chat says so (`Redemption is Lv80 now: next is 50 Ulhuadshi's Fang from Ulhuadsh
 - `//empy full` turns on the **full build** view: besides the stage you're on, the window also
   lists the NMs still ahead for each weapon, marked `LATER`, with just their item count. Handy
   for picking up Lv85/Lv90 items early. `//empy full off` goes back.
-- `//empy path twashtar` prints all three stages for one weapon in chat.
+- `//empy stage twashtar` prints every stage for one weapon in chat.
+
+### After Lv90
+
+| Stage | Trade | Weapons |
+| --- | --- | --- |
+| Lv95 | 1,500 Heavy Metal | all |
+| Lv99 | 60 Riftcinder | Verethragna, Almace, Farsha, Redemption, Rhongomiant, Masamune, Gandiva |
+| Lv99 | 60 Riftdross | Twashtar, Caladbolg, Ukonvasara, Kannagi, Gambanteinn, Hvergelmir, Armageddon |
+| Lv119 | 300 Riftborn Boulder | all |
+
+These stages have no NM chain, so their section shows the count, a progress bar and where the
+material comes from (Ambuscade and Voidwatch). The stage is read from your weapon the same way:
+a Lv90 copy means Lv95, Lv95 means Lv99, Lv99 means Lv119, and a Lv119 copy means done.
+The Lv95 figure is from BG Wiki; the Lv99 and Lv119 figures are from posts on the official
+forums when those upgrades came out, so check them against the Magian moogle.
+When **every** weapon you're building is on a material stage (Heavy Metal, Riftcinder,
+Riftdross, Riftborn Boulder), the window shows **anywhere**, since those aren't farmed in
+Abyssea. If any weapon is still on an NM stage, it keeps to the Abyssea zones as usual
+(or use `//empy where always`).
+
+### Counts on your other characters
+
+For items you can trade between your own characters, the window also shows what your other
+characters hold, e.g. `+300 on Valdmule = 1,420 / 1,500`. Heavy Metal always counts; for
+anything else EmpyBuilder checks the item itself and only counts it if it isn't Ex, so the
+Rare/Ex NM drops stay per character. Each character's counts are saved when it logs in and its
+bags are searched (`data/shared_counts.xml`), so log in on your mule once to add it.
 
 The window appears in all nine Abyssea zones with Empyrean NMs.
 
@@ -226,7 +270,7 @@ item from one step feeds straight into the next NM, ending with the key item `->
 - With **compact** on, a step you already have hides the steps under it, and an owned key
   item shrinks to one line.
 
-`//empy list` prints the same steps in chat.
+`//empy chain` prints the same steps in chat.
 
 **Where to go.** Every step has a *where* column with the nearest Veridical Conflux and the
 map square, e.g. `#4 F-7` (Conflux #4, square F-7). For an NM that's where its pop ??? is. Each
@@ -286,11 +330,125 @@ Every key item in these chains comes from an NM, so each carries `RED!!!` until 
 When you **target** that NM, the tag flashes and reads `RED!!! proc it`. Ordinary pop items
 (fangs, shields, scales...) need no red proc. `//empy red off` turns the alerts off.
 
+## Abyssea time
+
+The header shows how long your visitant status has left (`time 47m`): green, then yellow at
+10 minutes and red at 5.
+
+**Leaving with under 5 minutes left means waiting an hour to get back in**, so:
+
+- At **10 minutes** you get an alert to leave (or extend your time) within the next 5 minutes,
+  and the header counts down to the cut-off: `time 8m (leave in 3m)`.
+- At **5 minutes** a second alert warns that leaving now means the 1-hour wait, and the header
+  shows `time 4m (1h lockout)`.
+
+Each alert fires once; if you extend your time back above the mark, it can fire again later. The game prints *Your visitant status will
+wear off in 25 minutes.* now and then; each of those lines sets the clock, and it counts down
+in between, so it appears after the first such line of a visit. `//empy time 45` sets it by
+hand, `//empy time` says it in chat, `//empy time clear` hides it. It clears when you leave
+Abyssea.
+
+## Lights window
+
+The lights window is **off by default**. `//empy lights` turns it on (it only appears while you're in Abyssea), and `//empy lights off` turns it off again. It
+tallies the lights you gain this visit, from lines like *Valdimar's body emits a strong golden
+light!*: how many faint, mild and strong for each colour. When a Conflux Surveyor reports your
+exact lights (*Visitant Light Intensity Pearlescent: 120 / ...*), it shows those numbers and
+counts the gains since. Golden light raises the chance of gold chests, and the window lists
+which of your still-needed pop items and key items a gold chest in this zone can give:
+any of them in the first six zones, and the specific key items the maps list in Uleguerand,
+Altepa and Grauberg. Drag it anywhere; the spot is saved. Lights reset when you leave Abyssea.
+
+## Atma window
+
+The Atma window is **off by default**. Click the **Atma** button at the top right of the main
+window's header (green while the Atma window is on), or use `//empy atma`, to turn it on. It shows while you're in
+one of the nine Abyssea zones (or the Empyreal Paradox). It lists every NM in that zone that
+drops an Atma and whether you have it, from your key items:
+
+```
+ATMA  Tahrongi   6/10 owned
+target: Chloris  MISSING Atma of the Harvester
+
+[ ] Chloris               the Harvester           your chain
+[ ] Chukwa                the Adamantine          your chain
+[ ] Iratham               the Cosmos
+[x] Glavoid               Dunes
+...
+```
+
+- Missing Atmas come first, with NMs from the chains you're building at the top
+  (`your chain`).
+- **Target alert:** target an NM whose Atma you don't have and you get an alert (sound and
+  on-screen text) plus a chat line, e.g. `Chloris drops Atma of the Harvester, which you
+  don't have`. It won't repeat for the same NM within 5 minutes, and it works whether or not
+  the window is open. `//empy alert atma off` turns it off.
+- When you get an Atma that character has never had before, chat says so, once. Each
+  character's Atmas are remembered in its save file, so reloading or logging in doesn't list
+  them again.
+- Drag the window anywhere; the spot is saved.
+
+It covers the 99 NM Atmas from BG Wiki's Atma list plus Shinryu's. Synthetic Atmas (bought
+from an Atma Fabricant or earned from quests and missions) aren't monster drops, so they're
+not listed. If an Atma's name doesn't match the game's key item list, it shows `[?]`, and
+`//empy atma` lists those names so they can be fixed.
+
+
+## Procs window
+
+The **Procs** button sits just left of the Atma button in the main window's header (green while
+the window is on). Click it, or use `//empy procs`, to pop out a window listing the weapon skills
+that red proc in Abyssea, by element:
+
+| Element | Weapon skills |
+| --- | --- |
+| Fire | Red Lotus Blade (Sword) |
+| Ice | Freezebite (Great Sword) |
+| Wind | Cyclone (Dagger), Tachi: Jinpu (Great Katana) |
+| Earth | Earth Crusher (Staff) |
+| Lightning | Raiden Thrust (Polearm) |
+| Light | Seraph Blade (Sword), Seraph Strike (Club), Tachi: Koki (Great Katana), Sunburst (Staff) |
+| Dark | Shadow of Death (Scythe), Energy Drain (Dagger), Blade: Ei (Katana) |
+
+Weapon skills you can use with the weapon you're holding are ticked `[x]`. When the log has said
+what your target is weak to, that element is marked `> ... <- your target`, and a landed proc
+shows too. The window works anywhere (not just Abyssea), can be dragged, and remembers where you
+put it. Off by default.
+
+## Marks: how far and which way
+
+Stand at a ??? and type `//empy mark`. It saves that spot for the NM the NEXT step is about
+(or name it: `//empy mark gancanagh`; any NM or mob in your chains in this zone works). From
+then on that step shows the distance and direction from where you are, e.g. `140y NE`, in
+both layouts, and the NEXT box says `??? is 140y NE`. When you're near an unmarked ???, the
+NEXT box reminds you to mark it. `//empy mark list` lists your marks, `//empy mark clear
+<name>` removes one. Marks are shared by all your characters (`data/marks.xml`).
+
+## Alerts
+
+A sound and a big line of text at the top of the screen for:
+
+| Alert | When | Sound |
+| --- | --- | --- |
+| `atma` | you target an NM whose Atma you don't have | chime |
+| `soon` | a timed NM's respawn window opens in about a minute | chime |
+| `respawn` | a timed NM's respawn window opens | chime |
+| `up` | a timed NM's window has passed: it should be up (**off** by default) | chime |
+| `weakness` | the log names your target's weakness (with the weapon skill to use) | chime |
+| `redproc` | a red proc lands | success |
+| `goal` | you reach 50 / 75 of an item | success |
+| `time` | under 10 minutes (leave within 5) and under 5 minutes (1-hour lockout if you leave) | alert |
+
+`//empy alert` lists them, `//empy alert respawn off` turns one off, `//empy alert test` plays
+one. `//empy sound off` keeps the text but drops the sound; `//empy flash off` keeps the sound
+but drops the text. The sounds are in the addon's `sounds` folder; swap in your own `.wav`
+files with the same names if you like.
+
 ## Respawn timers
 
 Chukwa, Adze and Minhocao respawn **10-15 minutes** after they die, and Fistule **15-20
-minutes**. EmpyBuilder watches the chat log for the kill (*... defeats Chukwa.* or *Chukwa
-falls to the ground.*) and counts down:
+minutes**. EmpyBuilder sees the kill from the game's own defeat message (with the chat line
+*... defeats Chukwa.* / *Chukwa falls to the ground.* as a backup) and counts down:
 
 - **Steps:** a timed NM's line shows `respawn 6-11m` while it can't be up yet, `may be up
   (<4m)` once its window opens, and `should be up` after. Before you've seen it die, the line
@@ -300,10 +458,32 @@ falls to the ground.*) and counts down:
 - **Next step:** while a timed NM can't have respawned yet, the NEXT step moves on to
   something else you can do in the meantime, and comes back to it when nothing else is left.
 - **Chat:** `Chukwa down: respawns in 10-15 min (about 00:41-00:46)`.
+- **Alerts:** a heads-up about a minute before the window opens (`soon`), another when it
+  opens (`respawn`), and, if you turn it on with `//empy alert up on`, one when the window has
+  passed and it should be up.
 
 If someone else kills it out of your sight, start the timer yourself:
-`//empy killed chukwa`, or `//empy killed chukwa 4` if it died 4 minutes ago.
-`//empy killed clear` clears every timer. Timers are kept until you reload the addon.
+`//empy timer chukwa`, or `//empy timer chukwa 4` if it died 4 minutes ago. `//empy timer`
+lists the running timers and `//empy timer clear` clears them. Timers are kept until you reload the addon.
+
+## Kill log and estimate
+
+Every kill of a stage NM (Chloris, Glavoid, Ulhuadshi, Dragua...) is counted for that
+character, along with how many of its item turned up in your bags within 3 minutes of a kill.
+From that the window shows an estimate under the count:
+
+```
+12 kills, 1.4 per kill: ~27 more kills, 37 at most (~1h50m at this pace)
+```
+
+Every stage NM drops **at least 1** of its item per kill, so the estimate is never more kills
+than the items you still need ("37 at most"), and a logged rate below 1 per kill (say a drop
+you lotted after the 3 minutes) counts as 1. Before any kill is logged, the window still
+shows `at most 37 more kills (1+ drop per kill)`.
+
+The time is from how fast you've been killing it this session (after two kills). `//empy
+kills` lists kills, drops and drops per kill for each NM; `//empy kills reset` clears the log,
+`//empy kills reset chloris` clears one NM.
 
 ## Red proc helper
 
@@ -346,35 +526,76 @@ every **60 seconds** (`//empy every <seconds>`, `0` = changes only), plus `//emp
 
 ## Commands
 
-`//empy` or `//empybuilder`
+`//empy` or `//empybuilder`. `//empy help` lists them by topic, `//empy help <topic>` explains
+one topic (`weapons`, `window`, `tracking`, `alerts`, `general`), and `//empy help all` shows
+everything. Any toggle works with `on`, `off`, or nothing to flip it. A setting command with
+nothing after it (`size`, `pos`, `goal`, `every`, `where`, `opacity`) says its current value. A
+mistyped command suggests the ones it might be (`//empy tim` → `timer, time`).
+
+### Weapons and stages
 
 | Command | Does |
 | --- | --- |
 | `pick` | Open the weapon picker window |
-| `stage [80\|85\|90\|done\|auto] [weapon]` | Show every stage of your weapons, or set one by hand (`auto`: from your bags) |
-| `next [weapon]` | Move a weapon (or all of them) to its next stage |
-| `full [on\|off]` | Also show the NMs for each weapon's later stages, marked `LATER` |
-| `path <weapon>` | All three stages for one weapon in chat |
-| `weapon <name or type>` | Add a weapon you're building: `weapon Rhongomiant`, `weapon polearm` |
-| `add <name or type>` / `remove <name or type>` | Same as `weapon` / take one off the list |
-| `<name or type>` | Shortcut for `add`: `//empy scythe` |
-| `clear` | Remove all weapons |
-| `weapons` (or `weapon` alone) | All 14 weapons in chat, with item, NM and your count |
-| `show` / `hide` / `toggle` / `min` | Window visibility / minimize to the header |
+| `add <name\|type>` | Add a weapon: `add Rhongomiant`, `add polearm`, or just `//empy polearm` |
+| `remove <name\|type\|all>` | Take one weapon off the list, or all of them |
+| `weapons` | All 14 weapons with stage, item, NM and your count |
+| `stage [80..119\|done\|auto] [weapon]` | Alone: every stage of your weapons. With a level: set it by hand (`auto` = from your bags) |
+| `next [weapon]` | Move a weapon (or all) to its next stage |
+| `full [on\|off]` | Also show the later stages' NMs, marked `LATER` |
+| `chain` | Your NMs' pop chains and status in chat |
+
+### The window
+
+| Command | Does |
+| --- | --- |
+| `show` / `hide` / `toggle` | Turn the window on or off |
+| `min` | Minimize to the header (or click `[-]`) |
+| `layout [wide\|tall]` | Every step (default), or the narrow NEXT-step window; also `//empy tall`, `//empy wide` |
+| `where [farm\|abyssea\|always]` | The Empyrean NM zones (default), any Abyssea zone, or everywhere |
+| `zone [on\|off]` | Only the NMs for the zone you're in |
 | `compact [on\|off]` | Hide what's under a step you already have |
-| `red [on\|off]` | `RED!!!` alerts |
-| `where farm\|abyssea\|always` | Where the window appears: the three Lv80 zones (default), any Abyssea zone, or everywhere |
-| `zone [on\|off]` | Inside those zones, only show NMs for the zone you're in |
-| `announce [on\|off]` | Chat lines for new key items, count increases and reaching 50 |
-| `every <seconds>` | Timed search (default 60; `0` = changes only) |
-| `goal <n>` | Use this many items for every stage; `goal 0` goes back to 50 / 50 / 75 |
-| `near [on\|off\|<seconds>]` | Nearest conflux: on / off / how often it's checked (default 3 s); alone, says it in chat |
-| `killed <nm> [min ago]` | Start a respawn timer for a timed NM (Chukwa, Tunga, Hazhdiha...); `killed clear` clears them |
-| `layout wide\|tall` | Wide window with every step (default), or the narrow next-step window |
-| `opacity <10-100>` | How see-through the window is, panel and text together (default **75**) |
-| `size <n>` / `pos <x> <y>` | Text size / window position |
-| `list` | Your NMs' chains and status in chat |
+| `red [on\|off]` | `RED!!!` tags on key items that need a red proc |
+| `opacity <10-100>` | How see-through the window is (default **75**) |
+| `size <n>` / `pos <x> <y>` | Text size / window position (you can also drag it) |
+| `lights [on\|off]` | The lights window (off by default) |
+| `atma [on\|off]` | The Atma window (off by default); the **Atma** button in the header does the same |
+| `procs [on\|off]` | The red proc weapon skill window (off by default); the **Procs** button in the header does the same |
+
+### Timers and tracking
+
+| Command | Does |
+| --- | --- |
+| `timer` | Respawn timers that are running |
+| `timer <nm> [min ago]` / `timer clear` | Start a timer for a kill you didn't see (`timer chukwa 4`) / clear them |
+| `kills` / `kills reset [nm]` | Kills and drops per NM (used for the estimate) / clear the log |
+| `time [minutes\|clear]` | Abyssea time: say it, set it, or clear it |
+| `mark [nm]` / `mark list` / `mark clear <nm>` | Save a ??? spot for distance and direction |
+| `near [on\|off\|<seconds>]` | Nearest conflux; alone, says it in chat |
+
+### Alerts
+
+| Command | Does |
+| --- | --- |
+| `alert` | List the alerts and whether each is on |
+| `alert <kind> [on\|off]` / `alert test` | Turn one on or off / try one |
+| `sound [on\|off]` / `flash [on\|off]` | Alert sounds / big on-screen text |
+| `announce [on\|off]` | Chat lines for new key items, counts and reaching your goal |
+
+### General
+
+| Command | Does |
+| --- | --- |
+| `status` | Every setting at a glance |
 | `refresh` | Search bags and key items now |
+| `every <seconds>` | How often to search (default 60; `0` = only on changes) |
+| `goal <n>` | Items needed for every stage; `goal 0` goes back to the real amounts |
+| `about` | Show the loading lines again |
+| `reload` | Reload the addon (same as `//lua reload EmpyBuilder`) |
+| `debug [on\|off]` | Show every defeat the addon sees in chat, and what it did with it (to check kills are caught) |
+
+Older names still work: `weapon` (= `add`), `clear` (= `remove all`), `path` (= `stage`),
+`list` (= `chain`), `killed` (= `timer`).
 
 Display settings and window colours are in `addons/EmpyBuilder/data/settings.xml`; each
 character's weapon list is in `addons/EmpyBuilder/data/<CharacterName>.xml`.
